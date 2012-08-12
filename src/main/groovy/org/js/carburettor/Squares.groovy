@@ -88,4 +88,10 @@ class Squares {
         }
     }
 
+    static void reset() {
+        ALL_SQUARES.each {
+            it.empty()
+        }
+    }
+
 }

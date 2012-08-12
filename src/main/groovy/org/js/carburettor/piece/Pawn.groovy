@@ -28,12 +28,25 @@ class Pawn {
     }
 
     private List<Square> getPossibleMoves() {
-        def possibleSquares = [Squares.get(position.file, position.rank + 1)]
-        if (this.isAtInitialPosition())
-            possibleSquares << Squares.get(position.file, position.rank + 2)
+        def possibleSquares = []
+        def nextSquare = Squares.get(position.file, position.rank + 1)
 
-        return possibleSquares.findAll {it.isEmpty()}
+        if (nextSquare.isEmpty())
+            possibleSquares << nextSquare
 
+        def advanceByTwo = Squares.get(position.file, position.rank + 2)
+        if (this.isAtInitialPosition() && nextSquare.isEmpty() && advanceByTwo.isEmpty())
+            possibleSquares << advanceByTwo
+
+        def captureSquareOnNextFile = Squares.get(position.file.next(), position.rank + 1)
+        def captureSquareOnPrevFile = Squares.get(position.file.previous(), position.rank + 1)
+
+        [captureSquareOnNextFile, captureSquareOnPrevFile].each {captureSquare ->
+            if (captureSquare?.hasOpponentPieceComparedTo(this))
+                possibleSquares << captureSquare
+        }
+
+        return possibleSquares.findAll {it.isEmpty() || it.hasOpponentPieceComparedTo(this)}
     }
 
     private boolean isAtInitialPosition() {
