@@ -1,4 +1,6 @@
-package org.js.carburettor
+package org.js.carburettor.board
+
+import org.js.carburettor.board.Square
 
 class Squares {
     static final Square A1 = new Square(file: 'A', rank: 1)

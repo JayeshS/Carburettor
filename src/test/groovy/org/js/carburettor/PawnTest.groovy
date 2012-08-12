@@ -3,8 +3,8 @@ package org.js.carburettor
 import org.junit.Test
 import org.junit.Before
 import org.js.carburettor.piece.Pawn
-import static org.js.carburettor.Colour.*
-import org.js.carburettor.piece.IllegalMoveException
+import static org.js.carburettor.piece.Colour.*
+import org.js.carburettor.board.Squares
 
 class PawnTest {
 
@@ -60,6 +60,14 @@ class PawnTest {
         whitePawn = new Pawn(WHITE, Squares.B2);
 
         whitePawn.move(Squares.A3)
+    }
+
+    @Test(expected = IllegalMoveException.class)
+    void canNotJumpOverAPiece() {
+        whitePawn = new Pawn(WHITE, Squares.B2);
+        def anotherPawn = new Pawn(WHITE, Squares.B3);
+
+        whitePawn.move(Squares.B4)
     }
 
     @Test(expected = IllegalMoveException.class)

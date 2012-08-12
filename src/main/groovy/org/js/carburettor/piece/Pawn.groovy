@@ -1,10 +1,10 @@
 package org.js.carburettor.piece
 
-import org.js.carburettor.Colour
-import org.js.carburettor.Square
-import org.js.carburettor.Squares
-import static org.js.carburettor.Colour.WHITE
-import static org.js.carburettor.Colour.BLACK
+import org.js.carburettor.board.Square
+import org.js.carburettor.board.Squares
+import static org.js.carburettor.piece.Colour.WHITE
+import static org.js.carburettor.piece.Colour.BLACK
+import org.js.carburettor.IllegalMoveException
 
 class Pawn {
     Colour colour

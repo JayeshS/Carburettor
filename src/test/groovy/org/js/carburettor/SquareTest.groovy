@@ -2,6 +2,9 @@ package org.js.carburettor
 
 import org.js.carburettor.piece.Pawn
 import org.junit.Test
+import org.js.carburettor.board.Square
+import org.js.carburettor.board.Squares
+import org.js.carburettor.piece.Colour
 
 class SquareTest {
 
@@ -19,6 +22,6 @@ class SquareTest {
     void shouldReturnFalseWhenCheckingForOpponentPiecesForEmptySquares() {
         Pawn whitePawn = new Pawn(Colour.WHITE, Squares.A3)
 
-        assert Squares.G8.hasOpponentPieceComparedTo(whitePawn) == false
+        assert !Squares.G8.hasOpponentPieceComparedTo(whitePawn)
     }
 }

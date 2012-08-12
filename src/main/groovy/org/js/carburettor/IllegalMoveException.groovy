@@ -1,4 +1,4 @@
-package org.js.carburettor.piece
+package org.js.carburettor
 
 class IllegalMoveException extends RuntimeException {
     IllegalMoveException(String msg) {

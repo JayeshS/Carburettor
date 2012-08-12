@@ -1,6 +1,8 @@
 package org.js.carburettor
 
 import org.junit.Test
+import org.js.carburettor.board.Square
+import org.js.carburettor.board.Squares
 
 class SquaresTest {
 

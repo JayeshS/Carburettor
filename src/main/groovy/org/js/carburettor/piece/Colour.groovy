@@ -1,4 +1,4 @@
-package org.js.carburettor
+package org.js.carburettor.piece
 
 enum Colour {
     WHITE, BLACK
