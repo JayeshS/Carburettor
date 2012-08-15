@@ -31,7 +31,9 @@ class Bishop extends Piece {
         for (String currentFile in fileRange) {
             currentRank = changeRank(currentRank)
             Square possibleSquare = Squares.get(currentFile, currentRank)
-            if (possibleSquare == null) { continue }
+            if (possibleSquare == null) {
+                continue
+            }
             if (possibleSquare.isEmpty()) {
                 possibleSquares << possibleSquare
                 continue

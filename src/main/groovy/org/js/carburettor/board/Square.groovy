@@ -5,10 +5,6 @@ class Square {
     int rank
     def piece
 
-    String toString() {
-        "$file$rank"
-    }
-
     boolean isEmpty() {
         piece == null
     }
@@ -27,5 +23,9 @@ class Square {
         if (this.isEmpty())
             return false
         this.piece.colour == piece.colour
+    }
+
+    String toString() {
+        "$file$rank"
     }
 }
