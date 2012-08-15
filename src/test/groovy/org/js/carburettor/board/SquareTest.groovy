@@ -1,4 +1,4 @@
-package org.js.carburettor
+package org.js.carburettor.board
 
 import org.js.carburettor.piece.Pawn
 import org.junit.Test

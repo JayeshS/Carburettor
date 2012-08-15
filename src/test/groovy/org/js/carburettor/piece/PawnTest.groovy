@@ -1,10 +1,11 @@
-package org.js.carburettor
+package org.js.carburettor.piece
 
 import org.junit.Test
 import org.junit.Before
 import org.js.carburettor.piece.Pawn
 import static org.js.carburettor.piece.Colour.*
 import org.js.carburettor.board.Squares
+import org.js.carburettor.IllegalMoveException
 
 class PawnTest {
 

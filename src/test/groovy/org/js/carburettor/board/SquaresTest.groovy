@@ -1,4 +1,4 @@
-package org.js.carburettor
+package org.js.carburettor.board
 
 import org.junit.Test
 import org.js.carburettor.board.Square
