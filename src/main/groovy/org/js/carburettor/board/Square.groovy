@@ -17,9 +17,15 @@ class Square {
         piece = null
     }
 
-    boolean hasOpponentPieceComparedTo(def piece) {
+    boolean hasOpponentPiece(def piece) {
         if (this.isEmpty())
             return false
         this.piece.colour != piece.colour
+    }
+
+    boolean hasOwnPiece(def piece) {
+        if (this.isEmpty())
+            return false
+        this.piece.colour == piece.colour
     }
 }

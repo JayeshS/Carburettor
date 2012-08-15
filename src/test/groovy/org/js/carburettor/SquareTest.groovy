@@ -12,16 +12,16 @@ class SquareTest {
 
     @Test
     void shouldCorrectlyReportIfASquareHasOpponentsPiece() {
-        Pawn whitePawn = new Pawn(Colour.WHITE, Squares.A3)
-        Pawn blackPawn = new Pawn(Colour.BLACK, Squares.B3)
+        Pawn whitePawn = new Pawn(colour: Colour.WHITE, position: Squares.A3)
+        Pawn blackPawn = new Pawn(colour: Colour.BLACK, position: Squares.B3)
 
-        assert Squares.A3.hasOpponentPieceComparedTo(blackPawn)
+        assert Squares.A3.hasOpponentPiece(blackPawn)
     }
 
     @Test
     void shouldReturnFalseWhenCheckingForOpponentPiecesForEmptySquares() {
-        Pawn whitePawn = new Pawn(Colour.WHITE, Squares.A3)
+        Pawn whitePawn = new Pawn(colour: Colour.WHITE, position: Squares.A3)
 
-        assert !Squares.G8.hasOpponentPieceComparedTo(whitePawn)
+        assert !Squares.G8.hasOpponentPiece(whitePawn)
     }
 }
