@@ -7,7 +7,12 @@ class Bishop extends Piece {
 
     @Override
     List<Square> getPossibleMoves() {
+        return getAllDiagonalSquares()
+    }
+
+    private List<Square> getAllDiagonalSquares() {
         List<Square> possibleSquares = []
+
         def filesAhead = (position.file.next())..'H'
         def filesBehind = (position.file.previous())..'A'
         def incrementRank = {rank -> rank + 1}
@@ -18,7 +23,6 @@ class Bishop extends Piece {
         possibleSquares += getSquaresFor(filesAhead, decrementRank)
         possibleSquares += getSquaresFor(filesBehind, decrementRank)
         return possibleSquares
-
     }
 
     private List<Square> getSquaresFor(def fileRange, Closure changeRank) {
