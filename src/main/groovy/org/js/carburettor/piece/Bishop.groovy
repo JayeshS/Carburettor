@@ -30,6 +30,7 @@ class Bishop extends Piece {
             if (possibleSquare == null) { continue }
             if (possibleSquare.isEmpty()) {
                 possibleSquares << possibleSquare
+                continue
             }
             if (possibleSquare.hasOpponentPiece(this)) {
                 possibleSquares << possibleSquare
