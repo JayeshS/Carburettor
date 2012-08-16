@@ -1,9 +1,20 @@
 package org.js.carburettor.board
 
-import org.js.carburettor.piece.Piece
-
-@Category(Piece)
 class BoardTraversal {
 
-    void
+    def nextFile() {
+        return {it.next()}
+    }
+
+    def previousFile() {
+        return {it.previous()}
+    }
+
+    def nextRank() {
+        return {it + 1}
+    }
+
+    def previousRank() {
+        return {it - 1}
+    }
 }
