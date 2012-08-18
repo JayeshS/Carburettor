@@ -19,14 +19,16 @@ public class KingTest {
 
     @Test
     void canCreateKing() {
-        King whiteKing = new King(colour: WHITE, position: board['E1'])
+        King whiteKing = new King(colour: WHITE)
+        board.addAt 'e1', whiteKing
         assert whiteKing.position == board['E1']
         assert whiteKing.position.piece == whiteKing
     }
 
     @Test
     void canMoveOneSquareInAnyDirection() {
-        King whiteKing = new King(colour: WHITE, position: board['E2'])
+        King whiteKing = new King(colour: WHITE)
+        board.addAt 'e2', whiteKing
         assert whiteKing.possibleMoves.containsAll([board['D2'], board['D1'], board['E1'], board['F1'], board['F2'], board['F3'], board['E3'], board['D3']])
         assert whiteKing.possibleMoves.size() == 8
     }

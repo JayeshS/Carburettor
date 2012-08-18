@@ -20,7 +20,8 @@ class PawnTest {
 
     @Test
     void canCreateNewPawn() {
-        whitePawn = new Pawn(colour: WHITE, position: board['a2']);
+        whitePawn = new Pawn(colour: WHITE);
+        board.addAt 'a2', whitePawn
 
         assert whitePawn.position == board['a2']
         assert whitePawn.colour == WHITE
@@ -29,22 +30,26 @@ class PawnTest {
 
     @Test
     void canMovePawnFromA2ToA3() {
-        whitePawn = new Pawn(colour: WHITE, position: board['a2']);
+        whitePawn = new Pawn(colour: WHITE);
+        board.addAt 'a2', whitePawn
         whitePawn.move(board['A3'])
         assert whitePawn.position == board['A3']
     }
 
     @Test
     void canMovePawnFromA2ToA4() {
-        whitePawn = new Pawn(colour: WHITE, position: board['a2']);
+        whitePawn = new Pawn(colour: WHITE);
+        board.addAt 'a2', whitePawn
         whitePawn.move(board['A4'])
         assert whitePawn.position == board['A4']
     }
 
     @Test
     void canTakeDiagonallyOnTheNextFile() {
-        whitePawn = new Pawn(colour: WHITE, position: board['a2']);
-        Pawn blackPawn = new Pawn(colour: BLACK, position: board['B3']);
+        whitePawn = new Pawn(colour: WHITE);
+        board.addAt 'a2', whitePawn
+        Pawn blackPawn = new Pawn(colour: BLACK);
+        board.addAt 'b3', blackPawn
 
         whitePawn.move(board['B3'])
         assert whitePawn.position == board['B3']
@@ -52,8 +57,10 @@ class PawnTest {
 
     @Test
     void canTakeDiagonallyOnThePreviousFile() {
-        whitePawn = new Pawn(colour: WHITE, position: board['B2']);
-        Pawn blackPawn = new Pawn(colour: BLACK, position: board['A3']);
+        whitePawn = new Pawn(colour: WHITE);
+        board.addAt 'b2', whitePawn
+        Pawn blackPawn = new Pawn(colour: BLACK);
+        board.addAt 'a3', blackPawn
 
         whitePawn.move(board['A3'])
         assert whitePawn.position == board['A3']
@@ -61,35 +68,42 @@ class PawnTest {
 
     @Test(expected = IllegalMoveException.class)
     void canNotCaptureOnAnEmptySquare() {
-        whitePawn = new Pawn(colour: WHITE, position: board['B2']);
+        whitePawn = new Pawn(colour: WHITE);
+        board.addAt 'b2', whitePawn
 
         whitePawn.move(board['A3'])
     }
 
     @Test(expected = IllegalMoveException.class)
     void canNotJumpOverAPiece() {
-        whitePawn = new Pawn(colour: WHITE, position: board['B2']);
-        def anotherPawn = new Pawn(colour: WHITE, position: board['B3']);
+        whitePawn = new Pawn(colour: WHITE);
+        board.addAt 'b2', whitePawn
+        def anotherPawn = new Pawn(colour: WHITE);
+        board.addAt 'b3', anotherPawn
 
         whitePawn.move(board['B4'])
     }
 
     @Test(expected = IllegalMoveException.class)
     void canNotMovePawnFromA3ToA5() {
-        whitePawn = new Pawn(colour: WHITE, position: board['A3']);
+        whitePawn = new Pawn(colour: WHITE);
+        board.addAt 'a3', whitePawn
         whitePawn.move(board['A5'])
     }
 
     @Test(expected = IllegalMoveException.class)
     void canNotMovePawnBackwards() {
-        whitePawn = new Pawn(colour: WHITE, position: board['A3']);
+        whitePawn = new Pawn(colour: WHITE);
+        board.addAt 'a3', whitePawn
         whitePawn.move(board['a2'])
     }
 
     @Test(expected = IllegalMoveException.class)
     void canNotTakeOnTheSameFile() {
-        whitePawn = new Pawn(colour: WHITE, position: board['a2']);
-        Pawn blackPawn = new Pawn(colour: BLACK, position: board['A3']);
+        whitePawn = new Pawn(colour: WHITE);
+        board.addAt 'a2', whitePawn
+        Pawn blackPawn = new Pawn(colour: BLACK);
+        board.addAt 'a3', blackPawn
         whitePawn.move(board['A3'])
     }
 }

@@ -20,14 +20,16 @@ class RookTest {
     
     @Test
     void canCreateRook() {
-        rook = new Rook(colour: WHITE, position: board['D5'])
+        rook = new Rook(colour: WHITE)
+        board.addAt 'd5', rook
         assert rook.position == board['D5']
         assert rook.position.piece == rook
     }
 
     @Test
     void shouldMoveAlongRanksAndFiles() {
-        rook = new Rook(colour: WHITE, position: board['D5'])
+        rook = new Rook(colour: WHITE)
+        board.addAt 'd5', rook
         List<Square> possibleMoves = rook.getPossibleMoves()
         assert possibleMoves.containsAll([board['D1'], board['D2'], board['D3'], board['D4'], board['D6'], board['D7'], board['D8']])
         assert possibleMoves.containsAll([board['A5'], board['B5'], board['C5'], board['E5'], board['F5'], board['G5'], board['H5']])

@@ -1,5 +1,7 @@
 package org.js.carburettor.board
 
+import org.js.carburettor.piece.Piece
+
 class Board {
     static final Square A1 = new Square(file: 'A', rank: 1)
     static final Square A2 = new Square(file: 'A', rank: 2)
@@ -101,6 +103,11 @@ class Board {
     def getAt(String square) {
         assert square.length() == 2
         get(square[0], Integer.valueOf(square[1]))
+    }
+
+    def addAt(String square, Piece piece) {
+        piece.position = this[square]
+        piece.board = this
     }
 
 }

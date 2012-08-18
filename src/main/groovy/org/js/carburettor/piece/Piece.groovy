@@ -6,6 +6,9 @@ import org.js.carburettor.board.BoardTraversal
 import org.js.carburettor.board.Square
 
 abstract class Piece {
+
+    protected Board board
+
     protected BoardTraversal boardTraversal = new BoardTraversal()
 
     protected Colour colour
