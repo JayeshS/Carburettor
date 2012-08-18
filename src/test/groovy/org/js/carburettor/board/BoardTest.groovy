@@ -8,7 +8,7 @@ class BoardTest {
     void getShouldReturnCorrectSquareForGivenRankAndFile() {
         Board board = Board.createEmptyBoard()
         Square x = board['b2']
-        assert x.file == 'B'
+        assert x.file == 'b'
         assert x.rank == 2
     }
 }
