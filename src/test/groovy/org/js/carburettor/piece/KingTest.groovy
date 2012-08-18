@@ -3,7 +3,6 @@ package org.js.carburettor.piece
 import org.js.carburettor.board.Board
 import org.junit.Before
 import org.junit.Test
-import static org.js.carburettor.board.Board.reset
 import static org.js.carburettor.piece.Colour.WHITE
 
 public class KingTest {
@@ -14,7 +13,6 @@ public class KingTest {
     @Before
     void resetBoard() {
         board = Board.createEmptyBoard()
-        reset()
     }
 
     @Test

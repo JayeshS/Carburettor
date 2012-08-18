@@ -15,7 +15,6 @@ class PawnTest {
     @Before
     void resetBoard() {
         board = Board.createEmptyBoard()
-        Board.reset()
     }
 
     @Test

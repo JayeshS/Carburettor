@@ -35,7 +35,7 @@ abstract class Piece {
 
 
     private void calculateMoves(Square initialPosition, Closure changeFile, Closure changeRank, boolean limitStepsToOne, List<Square> result) {
-        Square possibleSquare = Board.get(changeFile(initialPosition.file), changeRank(initialPosition.rank))
+        Square possibleSquare = board[changeFile(initialPosition.file) + changeRank(initialPosition.rank)]
         if (possibleSquare == null || possibleSquare.hasOwnPiece(this)) {
             return
         }
