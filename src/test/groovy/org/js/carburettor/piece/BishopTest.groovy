@@ -1,12 +1,9 @@
 package org.js.carburettor.piece
 
 import org.junit.Test
-import static org.js.carburettor.board.Squares.*
+import static org.js.carburettor.board.Board.*
 import static org.js.carburettor.piece.Colour.BLACK
 import static org.js.carburettor.piece.Colour.WHITE
-import org.js.carburettor.board.Squares
-import org.js.carburettor.board.Square
-import org.js.carburettor.IllegalSquareException
 
 class BishopTest {
 

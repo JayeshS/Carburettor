@@ -1,7 +1,7 @@
 package org.js.carburettor.piece
 
 import org.junit.Test
-import static org.js.carburettor.board.Squares.*
+import static org.js.carburettor.board.Board.*
 import org.junit.Before
 
 class QueenTest {

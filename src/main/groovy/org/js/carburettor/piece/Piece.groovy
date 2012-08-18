@@ -3,7 +3,7 @@ package org.js.carburettor.piece
 import org.js.carburettor.IllegalMoveException
 import org.js.carburettor.board.BoardTraversal
 import org.js.carburettor.board.Square
-import org.js.carburettor.board.Squares
+import org.js.carburettor.board.Board
 
 abstract class Piece {
     protected BoardTraversal boardTraversal = new BoardTraversal()
@@ -32,7 +32,7 @@ abstract class Piece {
 
 
     private void calculateMoves(Square initialPosition, Closure changeFile, Closure changeRank, boolean limitStepsToOne, List<Square> result) {
-        Square possibleSquare = Squares.get(changeFile(initialPosition.file), changeRank(initialPosition.rank))
+        Square possibleSquare = Board.get(changeFile(initialPosition.file), changeRank(initialPosition.rank))
         if (possibleSquare == null || possibleSquare.hasOwnPiece(this)) {
             return
         }

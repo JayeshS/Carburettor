@@ -2,7 +2,7 @@ package org.js.carburettor.piece
 
 import org.junit.Test
 import static org.js.carburettor.piece.Colour.*
-import static org.js.carburettor.board.Squares.*
+import static org.js.carburettor.board.Board.*
 import org.js.carburettor.board.Square
 
 class RookTest {

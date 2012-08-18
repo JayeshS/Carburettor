@@ -2,7 +2,7 @@ package org.js.carburettor.piece
 
 import org.junit.Before
 import org.junit.Test
-import static org.js.carburettor.board.Squares.*
+import static org.js.carburettor.board.Board.*
 import static org.js.carburettor.piece.Colour.WHITE
 
 public class KingTest {
