@@ -6,7 +6,8 @@ class BoardTest {
 
     @Test
     void getShouldReturnCorrectSquareForGivenRankAndFile() {
-        Square x = Board.get('B', 2)
+        Board board = Board.createEmptyBoard()
+        Square x = board['b2']
         assert x.file == 'B'
         assert x.rank == 2
     }

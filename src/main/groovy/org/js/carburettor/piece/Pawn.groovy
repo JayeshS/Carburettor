@@ -1,9 +1,9 @@
 package org.js.carburettor.piece
 
-import org.js.carburettor.board.Square
 import org.js.carburettor.board.Board
-import static org.js.carburettor.piece.Colour.WHITE
+import org.js.carburettor.board.Square
 import static org.js.carburettor.piece.Colour.BLACK
+import static org.js.carburettor.piece.Colour.WHITE
 
 class Pawn extends Piece {
 

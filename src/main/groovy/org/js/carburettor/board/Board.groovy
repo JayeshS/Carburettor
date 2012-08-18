@@ -84,7 +84,7 @@ class Board {
 
     static Square get(String file, int rank) {
         return ALL_SQUARES.find {
-            it.rank.equals(rank) && it.file == file
+            it.rank == rank && it.file.equalsIgnoreCase(file)
         }
     }
 
@@ -92,6 +92,15 @@ class Board {
         ALL_SQUARES.each {
             it.empty()
         }
+    }
+
+    static Board createEmptyBoard() {
+        return new Board()
+    }
+
+    def getAt(String square) {
+        assert square.length() == 2
+        get(square[0], Integer.valueOf(square[1]))
     }
 
 }

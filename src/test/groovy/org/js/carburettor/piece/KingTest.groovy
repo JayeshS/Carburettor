@@ -1,30 +1,33 @@
 package org.js.carburettor.piece
 
+import org.js.carburettor.board.Board
 import org.junit.Before
 import org.junit.Test
-import static org.js.carburettor.board.Board.*
+import static org.js.carburettor.board.Board.reset
 import static org.js.carburettor.piece.Colour.WHITE
 
 public class KingTest {
 
+    private Board board
     private King king
 
     @Before
     void resetBoard() {
+        board = Board.createEmptyBoard()
         reset()
     }
 
     @Test
     void canCreateKing() {
-        King whiteKing = new King(colour: WHITE, position: E1)
-        assert whiteKing.position == E1
+        King whiteKing = new King(colour: WHITE, position: board['E1'])
+        assert whiteKing.position == board['E1']
         assert whiteKing.position.piece == whiteKing
     }
 
     @Test
     void canMoveOneSquareInAnyDirection() {
-        King whiteKing = new King(colour: WHITE, position: E2)
-        assert whiteKing.possibleMoves.containsAll([D2, D1, E1, F1, F2, F3, E3, D3])
+        King whiteKing = new King(colour: WHITE, position: board['E2'])
+        assert whiteKing.possibleMoves.containsAll([board['D2'], board['D1'], board['E1'], board['F1'], board['F2'], board['F3'], board['E3'], board['D3']])
         assert whiteKing.possibleMoves.size() == 8
     }
 }

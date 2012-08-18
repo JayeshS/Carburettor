@@ -1,9 +1,9 @@
 package org.js.carburettor.piece
 
 import org.js.carburettor.IllegalMoveException
+import org.js.carburettor.board.Board
 import org.js.carburettor.board.BoardTraversal
 import org.js.carburettor.board.Square
-import org.js.carburettor.board.Board
 
 abstract class Piece {
     protected BoardTraversal boardTraversal = new BoardTraversal()
