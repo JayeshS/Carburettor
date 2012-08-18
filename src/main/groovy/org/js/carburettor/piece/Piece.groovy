@@ -1,11 +1,13 @@
 package org.js.carburettor.piece
 
-import org.js.carburettor.board.Square
 import org.js.carburettor.IllegalMoveException
-import org.js.carburettor.IllegalSquareException
+import org.js.carburettor.board.BoardTraversal
+import org.js.carburettor.board.Square
 import org.js.carburettor.board.Squares
 
 abstract class Piece {
+    protected BoardTraversal boardTraversal = new BoardTraversal()
+
     protected Colour colour
     protected Square position
 
@@ -21,11 +23,15 @@ abstract class Piece {
     }
 
     def void getMoves(Closure changeFile, Closure changeRank, List<Square> result) {
-        getMoves(position, changeFile, changeRank, result)
+        calculateMoves(position, changeFile, changeRank, false, result)
+    }
+
+    def void getMoves(Closure changeFile, Closure changeRank, boolean limitStepsToOne, List<Square> result) {
+        calculateMoves(position, changeFile, changeRank, limitStepsToOne, result)
     }
 
 
-    private void getMoves(Square initialPosition, Closure changeFile, Closure changeRank, List<Square> result) {
+    private void calculateMoves(Square initialPosition, Closure changeFile, Closure changeRank, boolean limitStepsToOne, List<Square> result) {
         Square possibleSquare = Squares.get(changeFile(initialPosition.file), changeRank(initialPosition.rank))
         if (possibleSquare == null || possibleSquare.hasOwnPiece(this)) {
             return
@@ -36,7 +42,7 @@ abstract class Piece {
         }
         if (possibleSquare.isEmpty()) {
             result << possibleSquare
-            getMoves(possibleSquare, changeFile, changeRank, result)
+            if (!limitStepsToOne) calculateMoves(possibleSquare, changeFile, changeRank, false, result)
         }
     }
 

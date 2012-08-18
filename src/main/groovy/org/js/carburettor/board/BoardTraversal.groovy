@@ -3,18 +3,26 @@ package org.js.carburettor.board
 class BoardTraversal {
 
     def nextFile() {
-        return {it.next()}
+        {file-> file.next()}
     }
 
     def previousFile() {
-        return {it.previous()}
+        {file-> file.previous()}
     }
 
     def nextRank() {
-        return {it + 1}
+        {rank-> rank + 1}
     }
 
     def previousRank() {
-        return {it - 1}
+        {rank-> rank - 1}
+    }
+
+    def sameRank() {
+        {rank-> rank}
+    }
+
+    def sameFile() {
+        sameRank()
     }
 }

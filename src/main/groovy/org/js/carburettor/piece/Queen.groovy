@@ -1,11 +1,8 @@
 package org.js.carburettor.piece
 
 import org.js.carburettor.board.Square
-import org.js.carburettor.board.BoardTraversal
 
 class Queen extends Piece {
-
-    private BoardTraversal boardTraversal = new BoardTraversal()
 
     @Override
     List<Square> getPossibleMoves() {

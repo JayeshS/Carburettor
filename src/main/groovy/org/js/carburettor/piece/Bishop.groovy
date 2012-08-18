@@ -1,12 +1,8 @@
 package org.js.carburettor.piece
 
 import org.js.carburettor.board.Square
-import org.js.carburettor.board.Squares
-import org.js.carburettor.board.BoardTraversal
 
 class Bishop extends Piece {
-
-    private BoardTraversal boardTraversal = new BoardTraversal()
 
     @Override
     List<Square> getPossibleMoves() {
