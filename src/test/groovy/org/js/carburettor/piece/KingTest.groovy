@@ -51,4 +51,14 @@ public class KingTest {
 
         assert !whiteKing.possibleMoves.contains(board['e3'])
     }
+
+    @Test
+    void canNotMoveIntoCheckByOpponentsPawn() {
+        King whiteKing = new King(colour: WHITE)
+        board.addAt 'e2', whiteKing
+        Pawn blackPawn = new Pawn(colour: BLACK)
+        board.addAt 'f4', blackPawn
+
+        assert !whiteKing.possibleMoves.contains(board['e3'])
+    }
 }

@@ -3,7 +3,8 @@ package org.js.carburettor.board
 import org.js.carburettor.piece.Colour
 import org.js.carburettor.piece.Piece
 
-@SuppressWarnings("GroovyAssignabilityCheck") class Board {
+@SuppressWarnings("GroovyAssignabilityCheck")
+class Board {
 
     private List<Square> allSquares = []
 

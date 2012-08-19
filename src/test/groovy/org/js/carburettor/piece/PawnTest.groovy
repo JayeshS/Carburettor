@@ -65,6 +65,13 @@ class PawnTest {
         assert whitePawn.position == board['A3']
     }
 
+    @Test
+    void exertsASphereOfInfluenceDiagonally() {
+        Pawn blackPawn = new Pawn(colour: BLACK);
+        board.addAt 'f4', blackPawn
+        blackPawn.sphereOfInfluence == [board['e3'], board['g3']]
+    }
+
     @Test(expected = IllegalMoveException.class)
     void canNotCaptureOnAnEmptySquare() {
         whitePawn = new Pawn(colour: WHITE);
