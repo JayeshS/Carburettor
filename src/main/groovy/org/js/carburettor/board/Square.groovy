@@ -1,9 +1,12 @@
 package org.js.carburettor.board
 
+import org.js.carburettor.piece.Colour
+
 class Square {
     String file
     int rank
     def piece
+    private Board board
 
     boolean isEmpty() {
         piece == null
@@ -23,6 +26,10 @@ class Square {
         if (this.isEmpty())
             return false
         this.piece.colour == piece.colour
+    }
+
+    boolean isControlledBy (Colour colour) {
+        board.isSquareControlledBy(this, colour)
     }
 
     String toString() {

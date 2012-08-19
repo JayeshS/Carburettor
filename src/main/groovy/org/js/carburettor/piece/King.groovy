@@ -6,6 +6,16 @@ class King extends Piece {
 
     @Override
     List<Square> getPossibleMoves() {
+        def possibleMoves = getSphereOfInfluence()
+
+        possibleMoves.removeAll {square ->
+            square.isControlledBy(colour.opponent)
+        }
+
+        return possibleMoves
+    }
+
+    def List getSphereOfInfluence() {
         def possibleMoves = []
         getMoves(boardTraversal.previousFile(), boardTraversal.sameRank(), true, possibleMoves)
         getMoves(boardTraversal.previousFile(), boardTraversal.previousRank(), true, possibleMoves)

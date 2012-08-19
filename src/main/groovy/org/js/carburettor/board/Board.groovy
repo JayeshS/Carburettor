@@ -1,15 +1,16 @@
 package org.js.carburettor.board
 
+import org.js.carburettor.piece.Colour
 import org.js.carburettor.piece.Piece
 
-class Board {
+@SuppressWarnings("GroovyAssignabilityCheck") class Board {
 
     private List<Square> allSquares = []
 
     private Board() {
         ('a'..'h').each {file ->
             (1..8).each {rank ->
-                allSquares << new Square(file: file, rank: rank)
+                allSquares << new Square(file: file, rank: rank, board: this)
             }
         }
     }
@@ -35,4 +36,11 @@ class Board {
         piece.board = this
     }
 
+    boolean isSquareControlledBy(Square square, Colour colour) {
+        allSquares.find {
+            !it.isEmpty() &&
+            (it.piece.colour == colour) &&
+            it.piece.sphereOfInfluence?.contains(square)
+        }
+    }
 }

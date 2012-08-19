@@ -19,6 +19,10 @@ abstract class Piece {
         position.piece = this
     }
 
+    List<Square> getSphereOfInfluence() {
+        return getPossibleMoves()
+    }
+
     def move (Square square) {
         if (!getPossibleMoves().contains(square))
             throw new IllegalMoveException("Can't move ${this.class.simpleName} from $position to $square")
@@ -50,4 +54,11 @@ abstract class Piece {
     }
 
     abstract List<Square> getPossibleMoves();
+
+    @Override
+    String toString() {
+        return "${this.class.simpleName} at $position"
+    }
+
+
 }

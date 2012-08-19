@@ -3,6 +3,7 @@ package org.js.carburettor.piece
 import org.js.carburettor.board.Board
 import org.junit.Before
 import org.junit.Test
+import static org.js.carburettor.piece.Colour.BLACK
 import static org.js.carburettor.piece.Colour.WHITE
 
 public class KingTest {
@@ -29,5 +30,25 @@ public class KingTest {
         board.addAt 'e2', whiteKing
         assert whiteKing.possibleMoves.containsAll([board['D2'], board['D1'], board['E1'], board['F1'], board['F2'], board['F3'], board['E3'], board['D3']])
         assert whiteKing.possibleMoves.size() == 8
+    }
+
+    @Test
+    void canNotMoveIntoCheck() {
+        King whiteKing = new King(colour: WHITE)
+        board.addAt 'e2', whiteKing
+        Bishop blackBishop = new Bishop(colour: BLACK)
+        board.addAt 'd4', blackBishop
+
+        assert !whiteKing.possibleMoves.contains(board['e3'])
+    }
+
+    @Test
+    void canNotMoveIntoCheckByOpponentsKing() {
+        King whiteKing = new King(colour: WHITE)
+        board.addAt 'e2', whiteKing
+        King blackKing = new King(colour: BLACK)
+        board.addAt 'e4', blackKing
+
+        assert !whiteKing.possibleMoves.contains(board['e3'])
     }
 }
