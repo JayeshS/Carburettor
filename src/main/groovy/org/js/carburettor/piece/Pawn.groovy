@@ -27,6 +27,7 @@ class Pawn extends Piece {
 
         return possibleSquares.findAll {it.isEmpty() || it.hasOpponentPiece(this)}
     }
+
     List<Square> getSphereOfInfluence() {
         def captureSquareOnNextFile = board[position.file.next() + nextRank()]
         def captureSquareOnPrevFile = board[position.file.previous() + nextRank()]

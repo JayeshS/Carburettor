@@ -17,14 +17,14 @@ class King extends Piece {
 
     def List getSphereOfInfluence() {
         def possibleMoves = []
-        getMoves(boardTraversal.previousFile(), boardTraversal.sameRank(), true, possibleMoves)
-        getMoves(boardTraversal.previousFile(), boardTraversal.previousRank(), true, possibleMoves)
-        getMoves(boardTraversal.sameFile(), boardTraversal.previousRank(), true, possibleMoves)
-        getMoves(boardTraversal.nextFile(), boardTraversal.previousRank(), true, possibleMoves)
-        getMoves(boardTraversal.nextFile(), boardTraversal.sameRank(), true, possibleMoves)
-        getMoves(boardTraversal.nextFile(), boardTraversal.nextRank(), true, possibleMoves)
-        getMoves(boardTraversal.sameFile(), boardTraversal.nextRank(), true, possibleMoves)
-        getMoves(boardTraversal.previousFile(), boardTraversal.nextRank(), true, possibleMoves)
+        getMoves(boardTraversal.previousFile(), boardTraversal.sameRank(), possibleMoves, true)
+        getMoves(boardTraversal.previousFile(), boardTraversal.previousRank(), possibleMoves, true)
+        getMoves(boardTraversal.sameFile(), boardTraversal.previousRank(), possibleMoves, true)
+        getMoves(boardTraversal.nextFile(), boardTraversal.previousRank(), possibleMoves, true)
+        getMoves(boardTraversal.nextFile(), boardTraversal.sameRank(), possibleMoves, true)
+        getMoves(boardTraversal.nextFile(), boardTraversal.nextRank(), possibleMoves, true)
+        getMoves(boardTraversal.sameFile(), boardTraversal.nextRank(), possibleMoves, true)
+        getMoves(boardTraversal.previousFile(), boardTraversal.nextRank(), possibleMoves, true)
         return possibleMoves
     }
 

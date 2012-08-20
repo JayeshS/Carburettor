@@ -29,16 +29,8 @@ abstract class Piece {
         setPosition(square)
     }
 
-    def void getMoves(Closure changeFile, Closure changeRank, List<Square> result) {
-        calculateMoves(position, changeFile, changeRank, false, result)
-    }
-
-    def void getMoves(Closure changeFile, Closure changeRank, boolean limitStepsToOne, List<Square> result) {
-        calculateMoves(position, changeFile, changeRank, limitStepsToOne, result)
-    }
-
-
-    private void calculateMoves(Square initialPosition, Closure changeFile, Closure changeRank, boolean limitStepsToOne, List<Square> result) {
+    def void getMoves(Closure changeFile, Closure changeRank, List<Square> result,
+                                boolean limitStepsToOne = false, Square initialPosition = position) {
         Square possibleSquare = board[changeFile(initialPosition.file) + changeRank(initialPosition.rank)]
         if (possibleSquare == null || possibleSquare.hasOwnPiece(this)) {
             return
@@ -49,7 +41,7 @@ abstract class Piece {
         }
         if (possibleSquare.isEmpty()) {
             result << possibleSquare
-            if (!limitStepsToOne) calculateMoves(possibleSquare, changeFile, changeRank, false, result)
+            if (!limitStepsToOne) getMoves(changeFile, changeRank, result, false, possibleSquare)
         }
     }
 
