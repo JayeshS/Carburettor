@@ -28,11 +28,19 @@ class Square {
         this.piece.colour == piece.colour
     }
 
-    boolean isControlledBy (Colour colour) {
+    boolean isControlledBy(Colour colour) {
         board.isSquareControlledBy(this, colour)
     }
 
     String toString() {
         "$file$rank"
     }
+
+    @Override
+    boolean equals(Object o) {
+        if (o == null) return false
+        if (!(o instanceof Square)) return false
+        return (o.file == this.file) && (o.rank == this.rank)
+    }
+
 }

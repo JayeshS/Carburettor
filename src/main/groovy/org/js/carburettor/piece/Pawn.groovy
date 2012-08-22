@@ -6,6 +6,8 @@ import static org.js.carburettor.piece.Colour.WHITE
 
 class Pawn extends Piece {
 
+    Integer defaultWeight = 100
+
     List<Square> getPossibleMoves() {
         def possibleSquares = []
 

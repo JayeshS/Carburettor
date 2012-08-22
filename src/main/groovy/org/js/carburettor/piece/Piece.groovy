@@ -23,14 +23,14 @@ abstract class Piece {
         return getPossibleMoves()
     }
 
-    def move (Square square) {
+    def move(Square square) {
         if (!getPossibleMoves().contains(square))
             throw new IllegalMoveException("Can't move ${this.class.simpleName} from $position to $square")
         setPosition(square)
     }
 
     def void getMoves(Closure changeFile, Closure changeRank, List<Square> result,
-                                boolean limitStepsToOne = false, Square initialPosition = position) {
+                      boolean limitStepsToOne = false, Square initialPosition = position) {
         Square possibleSquare = board[changeFile(initialPosition.file) + changeRank(initialPosition.rank)]
         if (possibleSquare == null || possibleSquare.hasOwnPiece(this)) {
             return
@@ -45,12 +45,20 @@ abstract class Piece {
         }
     }
 
-    abstract List<Square> getPossibleMoves();
+    abstract List<Square> getPossibleMoves()
+
+    ;
 
     @Override
     String toString() {
-        return "${this.class.simpleName} at $position"
+        return "$colour ${this.class.simpleName} at $position"
     }
 
+    @Override
+    boolean equals(Object o) {
+        if (o == null) return false
+        if ((o.class != this.class)) return false
+        return (o.colour == this.colour) && (o.position == this.position)
+    }
 
 }

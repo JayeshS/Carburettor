@@ -4,6 +4,8 @@ import org.js.carburettor.board.Square
 
 class Queen extends Piece {
 
+    Integer defaultWeight = 950
+
     @Override
     List<Square> getPossibleMoves() {
         def possibleMoves = []

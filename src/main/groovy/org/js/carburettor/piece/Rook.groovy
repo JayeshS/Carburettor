@@ -4,6 +4,8 @@ import org.js.carburettor.board.Square
 
 class Rook extends Piece {
 
+    Integer defaultWeight = 550
+
     @Override
     List<Square> getPossibleMoves() {
         List<Square> possibleSquares = []

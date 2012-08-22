@@ -1,9 +1,9 @@
 package org.js.carburettor.board
 
-import org.js.carburettor.piece.Bishop
-import org.js.carburettor.piece.Colour
-import org.js.carburettor.piece.Pawn
 import org.junit.Test
+import org.js.carburettor.piece.*
+import static org.js.carburettor.piece.Colour.BLACK
+import static org.js.carburettor.piece.Colour.WHITE
 
 class BoardTest {
 
@@ -18,16 +18,54 @@ class BoardTest {
     @Test
     void shouldDetectWhenASquareIsControlledByAPawn() {
         Board board = Board.createEmptyBoard()
-        board.addAt 'a2', new Pawn(colour: Colour.WHITE)
+        board.addAt 'a2', new Pawn(colour: WHITE)
         assert board['a2'].piece.sphereOfInfluence.contains(board['b3'])
-        assert board.isSquareControlledBy(board['b3'], Colour.WHITE)
+        assert board.isSquareControlledBy(board['b3'], WHITE)
     }
 
     @Test
     void shouldDetectWhenASquareIsControlledByABishop() {
         Board board = Board.createEmptyBoard()
-        board.addAt 'a2', new Bishop(colour: Colour.WHITE)
+        board.addAt 'a2', new Bishop(colour: WHITE)
         assert board['a2'].piece.sphereOfInfluence.contains(board['c4'])
-        assert board.isSquareControlledBy(board['c4'], Colour.WHITE)
+        assert board.isSquareControlledBy(board['c4'], WHITE)
     }
+
+    @Test
+    void shouldSetupBoardForNewGame() {
+        Board board = Board.setupNewGame()
+        assertPieceAt('a1', WHITE, Rook.class, board)
+        assertPieceAt('b1', WHITE, Knight.class, board)
+        assertPieceAt('c1', WHITE, Bishop.class, board)
+        assertPieceAt('d1', WHITE, Queen.class, board)
+        assertPieceAt('e1', WHITE, King.class, board)
+        assertPieceAt('f1', WHITE, Bishop.class, board)
+        assertPieceAt('g1', WHITE, Knight.class, board)
+        assertPieceAt('h1', WHITE, Rook.class, board)
+        assertAllPawnsOnRank(2, WHITE, board)
+
+        assertPieceAt('a8', BLACK, Rook.class, board)
+        assertPieceAt('b8', BLACK, Knight.class, board)
+        assertPieceAt('c8', BLACK, Bishop.class, board)
+        assertPieceAt('d8', BLACK, Queen.class, board)
+        assertPieceAt('e8', BLACK, King.class, board)
+        assertPieceAt('f8', BLACK, Bishop.class, board)
+        assertPieceAt('g8', BLACK, Knight.class, board)
+        assertPieceAt('h8', BLACK, Rook.class, board)
+        assertAllPawnsOnRank(7, BLACK, board)
+    }
+
+    void assertAllPawnsOnRank(Integer rank, Colour colour, Board board) {
+        ('a'..'h').each {file ->
+            assertPieceAt(file + rank.toString(), colour, Pawn.class, board)
+        }
+    }
+
+    def assertPieceAt(String square, Colour colour, Class<? extends Piece> pieceClass, Board board) {
+        Piece expectedPiece = pieceClass.newInstance()
+        expectedPiece.position = new Square(file: square[0], rank: square[1].toInteger())
+        expectedPiece.colour = colour
+        assert board[square].piece == expectedPiece
+    }
+
 }

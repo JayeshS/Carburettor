@@ -4,6 +4,8 @@ import org.js.carburettor.board.Square
 
 class King extends Piece {
 
+    Integer defaultWeight = 10000
+
     @Override
     List<Square> getPossibleMoves() {
         def possibleMoves = getSphereOfInfluence()
