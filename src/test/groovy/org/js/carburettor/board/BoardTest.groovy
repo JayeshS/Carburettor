@@ -34,6 +34,16 @@ class BoardTest {
     @Test
     void shouldSetupBoardForNewGame() {
         Board board = Board.setupNewGame()
+        assertIsInInitialPosition(board)
+    }
+
+    @Test
+    void canSetupBoardForANewGameFromFenString() {
+        Board board = Board.create("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+        assertIsInInitialPosition(board)
+    }
+
+    void assertIsInInitialPosition(Board board) {
         assertPieceAt('a1', WHITE, Rook.class, board)
         assertPieceAt('b1', WHITE, Knight.class, board)
         assertPieceAt('c1', WHITE, Bishop.class, board)
@@ -55,13 +65,14 @@ class BoardTest {
         assertAllPawnsOnRank(7, BLACK, board)
     }
 
+
     void assertAllPawnsOnRank(Integer rank, Colour colour, Board board) {
         ('a'..'h').each {file ->
             assertPieceAt(file + rank.toString(), colour, Pawn.class, board)
         }
     }
 
-    def assertPieceAt(String square, Colour colour, Class<? extends Piece> pieceClass, Board board) {
+    void assertPieceAt(String square, Colour colour, Class<? extends Piece> pieceClass, Board board) {
         Piece expectedPiece = pieceClass.newInstance()
         expectedPiece.position = new Square(file: square[0], rank: square[1].toInteger())
         expectedPiece.colour = colour

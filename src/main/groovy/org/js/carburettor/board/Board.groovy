@@ -5,40 +5,48 @@ import org.js.carburettor.piece.*
 @SuppressWarnings("GroovyAssignabilityCheck")
 class Board {
 
+    private static final Map<Character, Class<Piece>> PIECE_FOR_FEN = [
+            'k':King.class,
+            'q':Queen.class,
+            'b':Bishop.class,
+            'n':Knight.class,
+            'r':Rook.class,
+            'p':Pawn.class
+    ]
+
     private List<Square> allSquares = []
 
-    private Board() {
-        ('a'..'h').each {file ->
-            (1..8).each {rank ->
-                allSquares << new Square(file: file, rank: rank, board: this)
+    static Board create(String fen) {
+        Board board = new Board()
+        String[] fields = fen.split(' ')
+        assert fields.length == 6
+
+        String squareData = fields[0]
+        String[] ranks = squareData.split('/')
+        Integer currentRank = 8
+        ranks.each {String rankData ->
+            String currentFile = 'a'
+            rankData.toCharArray().each {
+                if (it.isLetter()) {
+                    add(it, board, currentFile, currentRank)
+                    currentFile++
+                }
+                if (it.isDigit()) {
+                    Integer.valueOf(it.toString()).times {currentFile++}
+                }
             }
+            currentRank--
         }
+        return board
+
     }
 
-    private Square get(String file, int rank) {
-        return allSquares.find {
-            it.rank == rank && it.file.equalsIgnoreCase(file)
-        }
+    private static def add(char it, Board board, String currentFile, int currentRank) {
+        Piece piece = PIECE_FOR_FEN[it.toString().toLowerCase()].newInstance()
+        piece.colour = it.isUpperCase() ? Colour.WHITE : Colour.BLACK
+        board.addAt(currentFile + currentRank, piece)
     }
 
-
-    def getAt(String square) {
-        assert square.length() == 2
-        get(square[0], Integer.valueOf(square[1]))
-    }
-
-    def addAt(String square, Piece piece) {
-        piece.position = this[square]
-        piece.board = this
-    }
-
-    boolean isSquareControlledBy(Square square, Colour colour) {
-        allSquares.find {
-            !it.isEmpty() &&
-                    (it.piece.colour == colour) &&
-                    it.piece.sphereOfInfluence?.contains(square)
-        }
-    }
 
     static Board setupNewGame() {
         Board board = new Board()
@@ -61,6 +69,39 @@ class Board {
         board.addAt(allSquaresOnSeventhRank, {new Pawn(colour: Colour.BLACK)})
 
         return board
+    }
+
+    private Board() {
+        ('a'..'h').each {file ->
+            (1..8).each {rank ->
+                allSquares << new Square(file: file, rank: rank, board: this)
+            }
+        }
+    }
+
+
+    private Square get(String file, int rank) {
+        return allSquares.find {
+            it.rank == rank && it.file.equalsIgnoreCase(file)
+        }
+    }
+
+    def getAt(String square) {
+        assert square.length() == 2
+        get(square[0], Integer.valueOf(square[1]))
+    }
+
+    def addAt(String square, Piece piece) {
+        piece.position = this[square]
+        piece.board = this
+    }
+
+    boolean isSquareControlledBy(Square square, Colour colour) {
+        allSquares.find {
+            !it.isEmpty() &&
+                    (it.piece.colour == colour) &&
+                    it.piece.sphereOfInfluence?.contains(square)
+        }
     }
 
     def addAt(List<Square> squares, Closure pieceCreator) {

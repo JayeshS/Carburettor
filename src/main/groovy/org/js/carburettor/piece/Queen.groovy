@@ -8,8 +8,6 @@ class Queen extends Piece {
 
     @Override
     List<Square> getPossibleMoves() {
-        def possibleMoves = []
-
         List<Square> possibleSquares = []
         Closure sameRankOrFile = {it}
         getMoves(sameRankOrFile, boardTraversal.nextRank(), possibleSquares)
