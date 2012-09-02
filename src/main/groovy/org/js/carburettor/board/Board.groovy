@@ -5,51 +5,16 @@ import org.js.carburettor.piece.*
 @SuppressWarnings("GroovyAssignabilityCheck")
 class Board {
 
-    private static final Map<Character, Class<Piece>> PIECE_FOR_FEN = [
-            'k':King.class,
-            'q':Queen.class,
-            'b':Bishop.class,
-            'n':Knight.class,
-            'r':Rook.class,
-            'p':Pawn.class
-    ]
-
     private List<Square> allSquares = []
 
     static Board create(String fen) {
-        Board board = new Board()
-        String[] fields = fen.split(' ')
-        assert fields.length == 6
-
-        String squareData = fields[0]
-        String[] ranks = squareData.split('/')
-        Integer currentRank = 8
-        ranks.each {String rankData ->
-            String currentFile = 'a'
-            rankData.toCharArray().each {
-                if (it.isLetter()) {
-                    add(it, board, currentFile, currentRank)
-                    currentFile++
-                }
-                if (it.isDigit()) {
-                    Integer.valueOf(it.toString()).times {currentFile++}
-                }
-            }
-            currentRank--
-        }
+        Board board = createEmptyBoard()
+        new FenParser(fen, board)
         return board
-
     }
-
-    private static def add(char it, Board board, String currentFile, int currentRank) {
-        Piece piece = PIECE_FOR_FEN[it.toString().toLowerCase()].newInstance()
-        piece.colour = it.isUpperCase() ? Colour.WHITE : Colour.BLACK
-        board.addAt(currentFile + currentRank, piece)
-    }
-
 
     static Board setupNewGame() {
-        Board board = new Board()
+        Board board = createEmptyBoard()
         board.addAt(['a1', 'h1'], {new Rook(colour: Colour.WHITE)})
         board.addAt(['b1', 'g1'], {new Knight(colour: Colour.WHITE)})
         board.addAt(['c1', 'f1'], {new Bishop(colour: Colour.WHITE)})
@@ -92,7 +57,9 @@ class Board {
     }
 
     def addAt(String square, Piece piece) {
-        piece.position = this[square]
+        def theSquare = this[square]
+        assert theSquare != null, "Can not find square $square"
+        piece.position = theSquare
         piece.board = this
     }
 
