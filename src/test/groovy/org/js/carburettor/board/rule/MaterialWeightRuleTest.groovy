@@ -14,19 +14,19 @@ class MaterialWeightRuleTest {
     }
 
     @Test
-    public void materialIsEqualAtTheStart() throws Exception {
+    public void materialIsEqualAtTheStart() {
         Board board = Board.setupNewGame()
         assert rule.analyse(board) == 0
     }
 
     @Test
-    public void positiveValueIsUsedToIndicateWhiteHasMoreMaterial() throws Exception {
+    public void positiveValueIsUsedToIndicateWhiteHasMoreMaterial() {
         Board board = Board.setup("7k/8/8/8/8/8/7P/7K w - - 0 1")
         assert rule.analyse(board) == 100
     }
 
     @Test
-    public void negativeValueIsUsedToIndicateWhiteHasMoreMaterial() throws Exception {
+    public void negativeValueIsUsedToIndicateBlackHasMoreMaterial() {
         Board board = Board.setup("7k/7p/8/8/8/8/8/7K w - - 0 1")
         assert rule.analyse(board) == -100
     }
