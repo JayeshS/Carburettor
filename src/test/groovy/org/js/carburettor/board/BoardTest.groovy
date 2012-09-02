@@ -39,13 +39,13 @@ class BoardTest {
 
     @Test
     void canSetupBoardForANewGameFromFenString() {
-        Board board = Board.create("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
+        Board board = Board.setup("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
         assertIsInInitialPosition(board)
     }
 
     @Test
     void canSetupBoardForAMiddleGamePositionFromFenString() {
-        Board board = Board.create("5rkr/1p2Qpbp/pq1P4/2nB4/5p2/2N5/PPP4P/1K1RR3 w - - 0 1")
+        Board board = Board.setup("5rkr/1p2Qpbp/pq1P4/2nB4/5p2/2N5/PPP4P/1K1RR3 w - - 0 1")
         assertPieceAt('c3', WHITE, Knight.class, board)
         assertPieceAt('g7', BLACK, Bishop.class, board)
         assertPieceAt('e7', WHITE, Queen.class, board)

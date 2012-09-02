@@ -7,7 +7,7 @@ class Board {
 
     private List<Square> allSquares = []
 
-    static Board create(String fen) {
+    static Board setup(String fen) {
         Board board = createEmptyBoard()
         new FenParser(fen, board)
         return board
@@ -75,6 +75,12 @@ class Board {
         squares.each {square ->
             this.addAt(square, pieceCreator.call())
         }
+    }
+
+    List<Piece> findPieces(Closure criteria) {
+        allSquares.findAll {square ->
+            square.piece != null && criteria.call(square.piece)
+        }*.piece
     }
 
     static Board createEmptyBoard() {
