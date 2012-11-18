@@ -47,8 +47,6 @@ abstract class Piece {
 
     abstract List<Square> getPossibleMoves()
 
-    ;
-
     @Override
     String toString() {
         return "$colour ${this.class.simpleName} at $position"

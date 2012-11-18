@@ -8,14 +8,15 @@ class MaterialWeightRule implements AnalysisRule {
     @Override
     @SuppressWarnings("GroovyAssignabilityCheck")
     Integer analyse(Board board) {
-        def whitePieces = board.findPieces {it.colour == Colour.WHITE}
-
-        def weightAccumulator = {sum, piece -> sum + piece.defaultWeight}
-        Integer whiteWeight = whitePieces.inject(0, weightAccumulator)
-
-        def blackPieces = board.findPieces {it.colour == Colour.BLACK}
-        Integer blackWeight = blackPieces.inject(0, weightAccumulator)
-
+        Integer whiteWeight = calculatePieceWeightOf(Colour.WHITE, board)
+        Integer blackWeight = calculatePieceWeightOf(Colour.BLACK, board)
         return whiteWeight - blackWeight
+    }
+
+    Integer calculatePieceWeightOf(Colour colour, Board board) {
+        def pieces = board.findPieces {it.colour == colour}
+        pieces.inject(0, {sum, piece ->
+            sum + piece.defaultWeight
+        })
     }
 }
